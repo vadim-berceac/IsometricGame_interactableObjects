@@ -24,6 +24,7 @@ public class Character : MonoBehaviour
     [Inject] private readonly InteractableObject _interactableObject;
     [Inject] private readonly PlayableGraphHandle _graphHandle;
     [Inject] private readonly PropBones _propBones;
+    [Inject] private readonly CharacterPhysics  _characterPhysics;
 
     private Quaternion _targetRotation;
     private CancellationTokenSource _rotationCts;
@@ -33,6 +34,7 @@ public class Character : MonoBehaviour
     public PropBones PropBones => _propBones;
     public bool IsInteracting { get; private set; }
     public bool IsOnLadder { get; private set; }
+    public bool IsGrounded => _characterPhysics.IsGrounded;
 
     private void OnEnable()
     {
@@ -51,6 +53,7 @@ public class Character : MonoBehaviour
         gameObject.layer = playerLayer;
         
         OnRotationDirection += OnTurn;
+        _characterPhysics.OnGroundedChanged +=  OnGroundedChanged;
     }
 
     private void OnDisable()
@@ -64,6 +67,7 @@ public class Character : MonoBehaviour
         StopRotationLoop();
         
         OnRotationDirection -= OnTurn;
+        _characterPhysics.OnGroundedChanged -= OnGroundedChanged;
     }
     
     private void LateUpdate()
@@ -109,6 +113,11 @@ public class Character : MonoBehaviour
         _graphHandle.Stop(blendLength);
     }
 
+    private void OnGroundedChanged(bool value)
+    {
+        _animCache.SetOnAir(!value);
+    }
+
     private void OnTurn(float turn)
     {
         _animCache.OnTurn(turn);
@@ -131,7 +140,7 @@ public class Character : MonoBehaviour
     {
         while (!token.IsCancellationRequested)
         {
-            if (!IsInteracting && !IsOnLadder) 
+            if (IsGrounded && !IsInteracting && !IsOnLadder) 
             {
                 var previousRotation = _transform.rotation;
                 _transform.rotation = Quaternion.Slerp(_transform.rotation, _targetRotation, rotationToCursorSpeed * Time.deltaTime);
@@ -156,7 +165,7 @@ public class Character : MonoBehaviour
 
     private void RotatePlayerToCursor(Vector3 cursorPosition)
     {
-        if (IsInteracting || IsOnLadder)
+        if (!IsGrounded || IsInteracting || IsOnLadder)
         {
             return;
         }

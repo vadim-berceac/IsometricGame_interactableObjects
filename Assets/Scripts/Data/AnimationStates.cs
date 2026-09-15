@@ -9,6 +9,7 @@ public class AnimationStates
     public readonly int TurnHash =  Animator.StringToHash("Turn");
     public readonly int LadderDirectionHash =  Animator.StringToHash("LadderDirection");
     public readonly int Ladder = Animator.StringToHash("Ladder");
+    public readonly int IsOnAir = Animator.StringToHash("IsOnAir");
     
     public readonly int HashActivePara = Animator.StringToHash ("Active");
 }

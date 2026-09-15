@@ -15,8 +15,7 @@ public class AnimatorCache : IDisposable
     private float _targetSpeed;
     private float _currentSpeed;
 
-    public AnimatorCache(ICharacterInput characterInput, Animator animator,
-        AnimationStates animationStates)
+    public AnimatorCache(ICharacterInput characterInput, Animator animator, AnimationStates animationStates)
     {
         _characterInput = characterInput;
         _animator = animator;
@@ -64,6 +63,11 @@ public class AnimatorCache : IDisposable
     public void OnTurn(float turn)
     {
         _animator.SetFloat(_animationStates.TurnHash, turn);
+    }
+    
+    public void SetOnAir(bool onAir)
+    {
+        _animator.SetBool(_animationStates.IsOnAir, onAir);
     }
 
     private void OnMove(Vector2 input)
