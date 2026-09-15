@@ -1,0 +1,247 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2830597064744985658
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2428529588368588520}
+  - component: {fileID: 6122949127008614875}
+  - component: {fileID: 8239391810838038767}
+  - component: {fileID: 4371612435967899294}
+  - component: {fileID: 564959264926093693}
+  m_Layer: 0
+  m_Name: CharacterCombatInteractor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2428529588368588520
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2830597064744985658}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6326477850148263155}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6122949127008614875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2830597064744985658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 149c9a4e3046c23489b5092895c6812d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractionVolume
+  onEnter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1438194447983423130}
+        m_TargetAssemblyTypeName: DialogueAdapter, Assembly-CSharp
+        m_MethodName: ActivateCanvasWithText
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onExit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1438194447983423130}
+        m_TargetAssemblyTypeName: DialogueAdapter, Assembly-CSharp
+        m_MethodName: DeactivateCanvasWithDelay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  shape: 1
+  center: {x: 0, y: 0, z: 0}
+  boxSize: {x: 1, y: 1, z: 1}
+  sphereRadius: 4
+  interactionLayers:
+    serializedVersion: 2
+    m_Bits: 24576
+  drawGizmo: 1
+  drawGizmoOnlyWhenSelected: 0
+  gizmoColor: {r: 0, g: 1, b: 0.4, a: 0.35}
+--- !u!114 &8239391810838038767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2830597064744985658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7fdb9eed576c7e4aa4fc814fd1271d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterCombatInteractor
+--- !u!114 &4371612435967899294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2830597064744985658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80c10c934306c4341ac880010dd610e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractAnimation
+  trigger: {fileID: 6122949127008614875}
+  controller: {fileID: 0}
+  enterClip:
+    <Clip>k__BackingField: {fileID: 3094330708855449807, guid: df4509545a7d16c4ab4ca9b3146f3fa4, type: 3}
+    <EnterBlendLength>k__BackingField: 0
+    <ExitBlendLength>k__BackingField: 0
+    <Mask>k__BackingField: {fileID: 31900000, guid: 89527f5525238ee44b3182458d85143a, type: 2}
+    <IsAdditive>k__BackingField: 0
+  clips:
+  - <Clip>k__BackingField: {fileID: 3094330708855449807, guid: 8564329cc4759e3429f1456c9a0a4e3a, type: 3}
+    <EnterBlendLength>k__BackingField: 0
+    <ExitBlendLength>k__BackingField: 0
+    <Mask>k__BackingField: {fileID: 31900000, guid: 89527f5525238ee44b3182458d85143a, type: 2}
+    <IsAdditive>k__BackingField: 0
+  exitClip:
+    <Clip>k__BackingField: {fileID: 3094330708855449807, guid: 98cd8b0564ff2834ca502617d3f972d6, type: 3}
+    <EnterBlendLength>k__BackingField: 0
+    <ExitBlendLength>k__BackingField: 0
+    <Mask>k__BackingField: {fileID: 31900000, guid: 89527f5525238ee44b3182458d85143a, type: 2}
+    <IsAdditive>k__BackingField: 0
+  canBeInterrupted: 1
+  randomizeClipsOrder: 0
+  loopClipsBlock: 0
+  onInteractEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  onInteractExit:
+    m_PersistentCalls:
+      m_Calls: []
+  onClipStarted:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &564959264926093693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2830597064744985658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3429b2e38ea4fe64dbd68c44bdbe6110, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractMotion
+  trigger: {fileID: 4371612435967899294}
+  enterDelay: 0
+  enterTime: 0.2
+  exitTime: 0.2
+  ignoreCollisionsOnInteract: {fileID: 0}
+  controllerSource: 0
+  fixedController: {fileID: 0}
+  targetSource: 0
+  motionType: 0
+  footTarget: {fileID: 6326477850148263155}
+  exitType: 0
+  exitTarget: {fileID: 0}
+  onEnterMotionEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: DialogueAdapter, Assembly-CSharp
+        m_MethodName: Enable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onExitMotionStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: DialogueAdapter, Assembly-CSharp
+        m_MethodName: Enable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+--- !u!1 &4469978936452731923
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6326477850148263155}
+  - component: {fileID: 1438194447983423130}
+  m_Layer: 0
+  m_Name: DialogueAdapter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6326477850148263155
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4469978936452731923}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2428529588368588520}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1438194447983423130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4469978936452731923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c215b052831e944a9ce05a4adeae97c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueAdapter
+  phrase: E - combat
+  deactivateDelay: 0.2
+  temporaryDisableTime: 0

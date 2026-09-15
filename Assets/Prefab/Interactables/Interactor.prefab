@@ -77,6 +77,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogueAdapter
   phrase: E
   deactivateDelay: 0.2
+  temporaryDisableTime: 0
 --- !u!1 &6053095384428005994
 GameObject:
   m_ObjectHideFlags: 0
@@ -89,7 +90,6 @@ GameObject:
   - component: {fileID: 2576170867761236937}
   - component: {fileID: 3239691650369407241}
   - component: {fileID: 5932638286251608622}
-  - component: {fileID: 6368697960307694840}
   - component: {fileID: 1518139273377480010}
   - component: {fileID: 3227592533278123903}
   m_Layer: 0
@@ -206,18 +206,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &6368697960307694840
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6053095384428005994}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bd494d763c848743ba95157900e3644, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InteractableObject
 --- !u!114 &1518139273377480010
 MonoBehaviour:
   m_ObjectHideFlags: 0

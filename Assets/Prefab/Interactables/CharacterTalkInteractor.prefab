@@ -1,0 +1,537 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1972498732448166167
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2080541132687187322}
+  - component: {fileID: 1206862793834127737}
+  - component: {fileID: 2155456784903419410}
+  m_Layer: 0
+  m_Name: SelfAnimator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2080541132687187322
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1972498732448166167}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1396058692391508819}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1206862793834127737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1972498732448166167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80c10c934306c4341ac880010dd610e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractAnimation
+  trigger: {fileID: 9159651152004772112}
+  controller: {fileID: 0}
+  enterClip:
+    <Clip>k__BackingField: {fileID: 0}
+    <EnterBlendLength>k__BackingField: 0
+    <ExitBlendLength>k__BackingField: 0
+    <Mask>k__BackingField: {fileID: 0}
+    <IsAdditive>k__BackingField: 0
+  clips:
+  - <Clip>k__BackingField: {fileID: 3094330708855449807, guid: 5277e5180e302184fb73653674a14c85, type: 3}
+    <EnterBlendLength>k__BackingField: 0.1
+    <ExitBlendLength>k__BackingField: 0.1
+    <Mask>k__BackingField: {fileID: 31900000, guid: 89527f5525238ee44b3182458d85143a, type: 2}
+    <IsAdditive>k__BackingField: 0
+  - <Clip>k__BackingField: {fileID: 3094330708855449807, guid: 13e5c6347e4990141aff0df3db32a8d6, type: 3}
+    <EnterBlendLength>k__BackingField: 0.1
+    <ExitBlendLength>k__BackingField: 0.1
+    <Mask>k__BackingField: {fileID: 31900000, guid: 89527f5525238ee44b3182458d85143a, type: 2}
+    <IsAdditive>k__BackingField: 0
+  - <Clip>k__BackingField: {fileID: 3094330708855449807, guid: 657f537a6fb20704190454abfa01f377, type: 3}
+    <EnterBlendLength>k__BackingField: 0.1
+    <ExitBlendLength>k__BackingField: 0.1
+    <Mask>k__BackingField: {fileID: 31900000, guid: 89527f5525238ee44b3182458d85143a, type: 2}
+    <IsAdditive>k__BackingField: 0
+  - <Clip>k__BackingField: {fileID: 3094330708855449807, guid: f22f96823aeb8f54681ad8172d7d983a, type: 3}
+    <EnterBlendLength>k__BackingField: 0.1
+    <ExitBlendLength>k__BackingField: 0.1
+    <Mask>k__BackingField: {fileID: 31900000, guid: 89527f5525238ee44b3182458d85143a, type: 2}
+    <IsAdditive>k__BackingField: 0
+  - <Clip>k__BackingField: {fileID: 3094330708855449807, guid: 114738cc106889348abc7f661cb471b8, type: 3}
+    <EnterBlendLength>k__BackingField: 0.1
+    <ExitBlendLength>k__BackingField: 0.1
+    <Mask>k__BackingField: {fileID: 31900000, guid: 89527f5525238ee44b3182458d85143a, type: 2}
+    <IsAdditive>k__BackingField: 0
+  - <Clip>k__BackingField: {fileID: 3094330708855449807, guid: aebbf5f310305114e8a2aba689949942, type: 3}
+    <EnterBlendLength>k__BackingField: 0.1
+    <ExitBlendLength>k__BackingField: 0.1
+    <Mask>k__BackingField: {fileID: 31900000, guid: 89527f5525238ee44b3182458d85143a, type: 2}
+    <IsAdditive>k__BackingField: 0
+  - <Clip>k__BackingField: {fileID: 3094330708855449807, guid: a4aa72ceb1bc95946860f680bb0b1a99, type: 3}
+    <EnterBlendLength>k__BackingField: 0.1
+    <ExitBlendLength>k__BackingField: 0.1
+    <Mask>k__BackingField: {fileID: 31900000, guid: 89527f5525238ee44b3182458d85143a, type: 2}
+    <IsAdditive>k__BackingField: 0
+  - <Clip>k__BackingField: {fileID: 3094330708855449807, guid: ddbde77d15ccd5d42864ee5474f49d51, type: 3}
+    <EnterBlendLength>k__BackingField: 0.1
+    <ExitBlendLength>k__BackingField: 0.1
+    <Mask>k__BackingField: {fileID: 31900000, guid: 89527f5525238ee44b3182458d85143a, type: 2}
+    <IsAdditive>k__BackingField: 0
+  - <Clip>k__BackingField: {fileID: 3094330708855449807, guid: ffc8dd687a3364d4c900549526afc6da, type: 3}
+    <EnterBlendLength>k__BackingField: 0.1
+    <ExitBlendLength>k__BackingField: 0.1
+    <Mask>k__BackingField: {fileID: 31900000, guid: 89527f5525238ee44b3182458d85143a, type: 2}
+    <IsAdditive>k__BackingField: 0
+  - <Clip>k__BackingField: {fileID: 3094330708855449807, guid: 3896161f581ae2142b00aace91cc37ed, type: 3}
+    <EnterBlendLength>k__BackingField: 0.1
+    <ExitBlendLength>k__BackingField: 0.1
+    <Mask>k__BackingField: {fileID: 31900000, guid: 89527f5525238ee44b3182458d85143a, type: 2}
+    <IsAdditive>k__BackingField: 0
+  - <Clip>k__BackingField: {fileID: -4476584946280956403, guid: 7f642b3e0502dbb4d9332b5b0aceb709, type: 3}
+    <EnterBlendLength>k__BackingField: 0.1
+    <ExitBlendLength>k__BackingField: 0.1
+    <Mask>k__BackingField: {fileID: 31900000, guid: 89527f5525238ee44b3182458d85143a, type: 2}
+    <IsAdditive>k__BackingField: 0
+  - <Clip>k__BackingField: {fileID: -4476584946280956403, guid: 7f642b3e0502dbb4d9332b5b0aceb709, type: 3}
+    <EnterBlendLength>k__BackingField: 0.1
+    <ExitBlendLength>k__BackingField: 0.1
+    <Mask>k__BackingField: {fileID: 31900000, guid: 89527f5525238ee44b3182458d85143a, type: 2}
+    <IsAdditive>k__BackingField: 0
+  exitClip:
+    <Clip>k__BackingField: {fileID: 0}
+    <EnterBlendLength>k__BackingField: 0
+    <ExitBlendLength>k__BackingField: 0
+    <Mask>k__BackingField: {fileID: 0}
+    <IsAdditive>k__BackingField: 0
+  canBeInterrupted: 1
+  randomizeClipsOrder: 1
+  loopClipsBlock: 1
+  onInteractEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  onInteractExit:
+    m_PersistentCalls:
+      m_Calls: []
+  onClipStarted:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &2155456784903419410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1972498732448166167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3429b2e38ea4fe64dbd68c44bdbe6110, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractMotion
+  trigger: {fileID: 4060252932576036468}
+  enterDelay: 0
+  enterTime: 0.2
+  exitTime: 0.3
+  ignoreCollisionsOnInteract: {fileID: 0}
+  controllerSource: 1
+  fixedController: {fileID: 0}
+  targetSource: 1
+  motionType: 0
+  footTarget: {fileID: 0}
+  exitType: 1
+  exitTarget: {fileID: 0}
+  onEnterMotionEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  onExitMotionStart:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!1 &3427332855237049181
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8575956424543545805}
+  m_Layer: 0
+  m_Name: FootTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8575956424543545805
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3427332855237049181}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 1396058692391508819}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!1 &7853258115805398294
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 788268298886193922}
+  - component: {fileID: 4601710081245760557}
+  m_Layer: 0
+  m_Name: DialogueAdapter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &788268298886193922
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7853258115805398294}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 0.5, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1396058692391508819}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4601710081245760557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7853258115805398294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c215b052831e944a9ce05a4adeae97c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueAdapter
+  phrase: E - talk
+  deactivateDelay: 0.2
+  temporaryDisableTime: 0
+--- !u!1 &8739660630479761748
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1396058692391508819}
+  - component: {fileID: 1047382573825356023}
+  - component: {fileID: 125215973409321527}
+  - component: {fileID: 9159651152004772112}
+  - component: {fileID: 8442912478935918534}
+  - component: {fileID: 4060252932576036468}
+  - component: {fileID: 109176459744762945}
+  m_Layer: 0
+  m_Name: CharacterTalkInteractor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1396058692391508819
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8739660630479761748}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8575956424543545805}
+  - {fileID: 788268298886193922}
+  - {fileID: 2080541132687187322}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1047382573825356023
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8739660630479761748}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 12343
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &125215973409321527
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8739660630479761748}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &9159651152004772112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8739660630479761748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3bfd19b69d7c964c8fa028de5967b01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractOnTrigger
+  onEnter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4601710081245760557}
+        m_TargetAssemblyTypeName: DialogueAdapter, Assembly-CSharp
+        m_MethodName: ActivateCanvasWithText
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onExit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4601710081245760557}
+        m_TargetAssemblyTypeName: DialogueAdapter, Assembly-CSharp
+        m_MethodName: DeactivateCanvasWithDelay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &8442912478935918534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8739660630479761748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bd494d763c848743ba95157900e3644, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractableObject
+--- !u!114 &4060252932576036468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8739660630479761748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80c10c934306c4341ac880010dd610e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractAnimation
+  trigger: {fileID: 9159651152004772112}
+  controller: {fileID: 0}
+  enterClip:
+    <Clip>k__BackingField: {fileID: 0}
+    <EnterBlendLength>k__BackingField: 0
+    <ExitBlendLength>k__BackingField: 0
+    <Mask>k__BackingField: {fileID: 0}
+    <IsAdditive>k__BackingField: 0
+  clips:
+  - <Clip>k__BackingField: {fileID: 3094330708855449807, guid: 5277e5180e302184fb73653674a14c85, type: 3}
+    <EnterBlendLength>k__BackingField: 0.1
+    <ExitBlendLength>k__BackingField: 0.1
+    <Mask>k__BackingField: {fileID: 31900000, guid: 89527f5525238ee44b3182458d85143a, type: 2}
+    <IsAdditive>k__BackingField: 0
+  - <Clip>k__BackingField: {fileID: 3094330708855449807, guid: 13e5c6347e4990141aff0df3db32a8d6, type: 3}
+    <EnterBlendLength>k__BackingField: 0.1
+    <ExitBlendLength>k__BackingField: 0.1
+    <Mask>k__BackingField: {fileID: 31900000, guid: 89527f5525238ee44b3182458d85143a, type: 2}
+    <IsAdditive>k__BackingField: 0
+  - <Clip>k__BackingField: {fileID: 3094330708855449807, guid: 657f537a6fb20704190454abfa01f377, type: 3}
+    <EnterBlendLength>k__BackingField: 0.1
+    <ExitBlendLength>k__BackingField: 0.1
+    <Mask>k__BackingField: {fileID: 31900000, guid: 89527f5525238ee44b3182458d85143a, type: 2}
+    <IsAdditive>k__BackingField: 0
+  - <Clip>k__BackingField: {fileID: 3094330708855449807, guid: f22f96823aeb8f54681ad8172d7d983a, type: 3}
+    <EnterBlendLength>k__BackingField: 0.1
+    <ExitBlendLength>k__BackingField: 0.1
+    <Mask>k__BackingField: {fileID: 31900000, guid: 89527f5525238ee44b3182458d85143a, type: 2}
+    <IsAdditive>k__BackingField: 0
+  - <Clip>k__BackingField: {fileID: 3094330708855449807, guid: 114738cc106889348abc7f661cb471b8, type: 3}
+    <EnterBlendLength>k__BackingField: 0.1
+    <ExitBlendLength>k__BackingField: 0.1
+    <Mask>k__BackingField: {fileID: 31900000, guid: 89527f5525238ee44b3182458d85143a, type: 2}
+    <IsAdditive>k__BackingField: 0
+  - <Clip>k__BackingField: {fileID: 3094330708855449807, guid: aebbf5f310305114e8a2aba689949942, type: 3}
+    <EnterBlendLength>k__BackingField: 0.1
+    <ExitBlendLength>k__BackingField: 0.1
+    <Mask>k__BackingField: {fileID: 31900000, guid: 89527f5525238ee44b3182458d85143a, type: 2}
+    <IsAdditive>k__BackingField: 0
+  - <Clip>k__BackingField: {fileID: 3094330708855449807, guid: a4aa72ceb1bc95946860f680bb0b1a99, type: 3}
+    <EnterBlendLength>k__BackingField: 0.1
+    <ExitBlendLength>k__BackingField: 0.1
+    <Mask>k__BackingField: {fileID: 31900000, guid: 89527f5525238ee44b3182458d85143a, type: 2}
+    <IsAdditive>k__BackingField: 0
+  - <Clip>k__BackingField: {fileID: 3094330708855449807, guid: ddbde77d15ccd5d42864ee5474f49d51, type: 3}
+    <EnterBlendLength>k__BackingField: 0.1
+    <ExitBlendLength>k__BackingField: 0.1
+    <Mask>k__BackingField: {fileID: 31900000, guid: 89527f5525238ee44b3182458d85143a, type: 2}
+    <IsAdditive>k__BackingField: 0
+  - <Clip>k__BackingField: {fileID: 3094330708855449807, guid: ffc8dd687a3364d4c900549526afc6da, type: 3}
+    <EnterBlendLength>k__BackingField: 0.1
+    <ExitBlendLength>k__BackingField: 0.1
+    <Mask>k__BackingField: {fileID: 31900000, guid: 89527f5525238ee44b3182458d85143a, type: 2}
+    <IsAdditive>k__BackingField: 0
+  - <Clip>k__BackingField: {fileID: 3094330708855449807, guid: 3896161f581ae2142b00aace91cc37ed, type: 3}
+    <EnterBlendLength>k__BackingField: 0.1
+    <ExitBlendLength>k__BackingField: 0.1
+    <Mask>k__BackingField: {fileID: 31900000, guid: 89527f5525238ee44b3182458d85143a, type: 2}
+    <IsAdditive>k__BackingField: 0
+  - <Clip>k__BackingField: {fileID: -4476584946280956403, guid: 7f642b3e0502dbb4d9332b5b0aceb709, type: 3}
+    <EnterBlendLength>k__BackingField: 0.1
+    <ExitBlendLength>k__BackingField: 0.1
+    <Mask>k__BackingField: {fileID: 31900000, guid: 89527f5525238ee44b3182458d85143a, type: 2}
+    <IsAdditive>k__BackingField: 0
+  - <Clip>k__BackingField: {fileID: -4476584946280956403, guid: 7f642b3e0502dbb4d9332b5b0aceb709, type: 3}
+    <EnterBlendLength>k__BackingField: 0.1
+    <ExitBlendLength>k__BackingField: 0.1
+    <Mask>k__BackingField: {fileID: 31900000, guid: 89527f5525238ee44b3182458d85143a, type: 2}
+    <IsAdditive>k__BackingField: 0
+  exitClip:
+    <Clip>k__BackingField: {fileID: 0}
+    <EnterBlendLength>k__BackingField: 0
+    <ExitBlendLength>k__BackingField: 0
+    <Mask>k__BackingField: {fileID: 0}
+    <IsAdditive>k__BackingField: 0
+  canBeInterrupted: 1
+  randomizeClipsOrder: 1
+  loopClipsBlock: 1
+  onInteractEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  onInteractExit:
+    m_PersistentCalls:
+      m_Calls: []
+  onClipStarted:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &109176459744762945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8739660630479761748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3429b2e38ea4fe64dbd68c44bdbe6110, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractMotion
+  trigger: {fileID: 4060252932576036468}
+  enterDelay: 0
+  enterTime: 0.2
+  exitTime: 0.2
+  ignoreCollisionsOnInteract: {fileID: 0}
+  controllerSource: 0
+  fixedController: {fileID: 0}
+  targetSource: 0
+  motionType: 0
+  footTarget: {fileID: 0}
+  exitType: 0
+  exitTarget: {fileID: 0}
+  onEnterMotionEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4601710081245760557}
+        m_TargetAssemblyTypeName: DialogueAdapter, Assembly-CSharp
+        m_MethodName: Enable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onExitMotionStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4601710081245760557}
+        m_TargetAssemblyTypeName: DialogueAdapter, Assembly-CSharp
+        m_MethodName: Enable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2

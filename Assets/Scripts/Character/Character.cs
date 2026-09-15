@@ -21,7 +21,7 @@ public class Character : MonoBehaviour
     [Inject] private readonly AnimationStates _animationStates;
     [Inject] private readonly AnimatorCache _animCache;
     [Inject] private readonly CameraSystem _cameraSystem;
-    [Inject] private readonly InteractableObject _interactableObject;
+    [Inject] private readonly CharacterTalkInteractor _characterTalkInteractor;
     [Inject] private readonly PlayableGraphHandle _graphHandle;
     [Inject] private readonly PropBones _propBones;
     [Inject] private readonly CharacterPhysics  _characterPhysics;
@@ -46,7 +46,7 @@ public class Character : MonoBehaviour
         gameObject.AddComponent<AudioListener>();
         _cameraSystem.SetTarget(_transform);
         _targetRotation = _transform.rotation;
-        _interactableObject.gameObject.SetActive(false);
+        _characterTalkInteractor.gameObject.SetActive(false);
         _cursor.OnCursorMoved += RotatePlayerToCursor;
         StartRotationLoop();
 
