@@ -8,6 +8,7 @@ using Zenject;
 public class LadderInteractor : MonoBehaviour
 {
    [SerializeField] private InteractionActivator trigger;
+   [SerializeField] private DialogueAdapter dialogueAdapter;
    [SerializeField] private LadderStopper stopper;
    [SerializeField] private float walkSpeed;
    [SerializeField] private float runSpeed;
@@ -109,6 +110,10 @@ public class LadderInteractor : MonoBehaviour
       CurrentController.SetOnLadder(true, _currentDirection);
       _isPlaying = true;
 
+      SetTriggerActive(false);
+      if (OtherEnd)
+         OtherEnd.SetTriggerActive(false);
+
       var targetPosition = transform.TransformPoint(positionOffset);
       targetPosition.y = CurrentController.transform.position.y;
 
@@ -124,6 +129,8 @@ public class LadderInteractor : MonoBehaviour
 
       var characterTransform = CurrentController.transform;
       var targetRotation = transform.rotation;
+      var controller = CurrentController;
+      var completed = false;
 
       SetStopperActive(false);
 
@@ -132,7 +139,26 @@ public class LadderInteractor : MonoBehaviour
          .Join(characterTransform.DORotateQuaternion(targetRotation, enterDuration).SetEase(enterEase))
          .SetTarget(characterTransform)
          .SetLink(gameObject)
-         .OnComplete(StartRotationLoop);
+         .OnComplete(() =>
+         {
+            completed = true;
+            StartRotationLoop();
+         })
+         .OnKill(() =>
+         {
+            if (completed || CurrentController != controller)
+               return;
+
+            controller.SetOnLadder(false);
+            CurrentController = null;
+            _isPlaying = false;
+
+            SetTriggerActive(true);
+            if (OtherEnd)
+               OtherEnd.SetTriggerActive(true);
+
+            SetStopperActive(true);
+         });
 
       _stopperReenableTween = DOVirtual.DelayedCall(enterDuration + stopperDisableBuffer, () => SetStopperActive(true))
          .SetTarget(this)
@@ -143,6 +169,19 @@ public class LadderInteractor : MonoBehaviour
    {
       if (stopper)
          stopper.gameObject.SetActive(value);
+   }
+
+   private void SetTriggerActive(bool value)
+   {
+      if (trigger)
+      {
+         trigger.enabled = value;
+      }
+
+      if (dialogueAdapter)
+      {
+         dialogueAdapter.Enable(value);
+      }
    }
 
    public void OnInteractExit()
@@ -189,6 +228,10 @@ public class LadderInteractor : MonoBehaviour
       owner.CurrentController = null;
       owner._isPlaying = false;
       owner._isExiting = false;
+
+      owner.SetTriggerActive(true);
+      if (owner.OtherEnd)
+         owner.OtherEnd.SetTriggerActive(true);
    }
 
    private void StartRotationLoop()

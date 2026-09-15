@@ -192,7 +192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogueAdapter
   phrase: E - use ladder
   deactivateDelay: 0.2
-  temporaryDisableTime: 3
+  temporaryDisableTime: 0
 --- !u!1 &4698867843588402589
 GameObject:
   m_ObjectHideFlags: 0
@@ -334,6 +334,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LadderInteractor
   trigger: {fileID: 6943974494640726606}
+  dialogueAdapter: {fileID: 5428928731713028380}
   stopper: {fileID: 2744864021345144143}
   walkSpeed: 0.6
   runSpeed: 1.2
@@ -348,19 +349,7 @@ MonoBehaviour:
   exitEase: 7
   onInteractEnter:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5428928731713028380}
-        m_TargetAssemblyTypeName: DialogueAdapter, Assembly-CSharp
-        m_MethodName: TemporaryDisable
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   onInteractExit:
     m_PersistentCalls:
       m_Calls: []
