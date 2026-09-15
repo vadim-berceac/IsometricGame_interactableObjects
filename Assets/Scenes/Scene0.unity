@@ -3313,7 +3313,7 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410087039}
   m_Enabled: 1
-  serializedVersion: 12
+  serializedVersion: 13
   m_Type: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 2
@@ -3365,7 +3365,7 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ForceVisible: 0
-  m_ShadowRadius: 0
+  m_ShapeRadius: 0
   m_ShadowAngle: 0
   m_LightUnit: 1
   m_LuxAtDistance: 1
@@ -14895,7 +14895,7 @@ PrefabInstance:
       objectReference: {fileID: 1332325388}
     - target: {fileID: 3080079876269949571, guid: 871e4984f47d0fc43bebda64bdbb2612, type: 3}
       propertyPath: m_VersionIndex
-      value: 542
+      value: 548
       objectReference: {fileID: 0}
     - target: {fileID: 3116767115052958018, guid: 871e4984f47d0fc43bebda64bdbb2612, type: 3}
       propertyPath: m_Name
@@ -22242,7 +22242,7 @@ PrefabInstance:
       objectReference: {fileID: 200711093}
     - target: {fileID: 4705130179987880174, guid: 4cb966699ec20844cac15b5884151252, type: 3}
       propertyPath: m_VersionIndex
-      value: 233
+      value: 239
       objectReference: {fileID: 0}
     - target: {fileID: 5110465817614404965, guid: 4cb966699ec20844cac15b5884151252, type: 3}
       propertyPath: m_Mesh
