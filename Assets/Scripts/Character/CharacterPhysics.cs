@@ -2,12 +2,13 @@ using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using Zenject;
 
 public class CharacterPhysics : IDisposable
 {
     private const string ElevatorTag = "Elevator";
     private readonly Collider _col;
-    private readonly Character _character;
+    [Inject] private readonly Character _character;
     private readonly Transform _transform;
     private readonly CapsuleCollider _capsule;
     private readonly LayerMask _collisionMask;
@@ -21,13 +22,16 @@ public class CharacterPhysics : IDisposable
     private Collider _groundCollider;
     private bool _isGrounded;
     private Elevator _currentElevator;
+    private float _ungroundedTimer;
+    
+    public bool IsGrounded => _isGrounded;
+    public event Action<bool> OnGroundedChanged;
 
-    private CharacterPhysics(Collider col, Character character,
+    private CharacterPhysics(Collider col,
         Transform transform, GravityCollisionSettings settings,
         LayerMask? collisionMask = null)
     {
         _col = col;
-        _character = character;
         _transform = transform;
         _collisionMask = collisionMask ?? Physics.AllLayers;
         _settings = settings;
@@ -64,11 +68,12 @@ public class CharacterPhysics : IDisposable
     {
         if (!_character.IsOnLadder)
         {
-            CheckGround();
+            CheckGround(dt);
         }
         else
         {
-            _isGrounded = false;
+            _ungroundedTimer = 0f;
+            SetGrounded(false);
             _groundCollider = null;
         }
 
@@ -76,7 +81,7 @@ public class CharacterPhysics : IDisposable
         MoveVertical(_verticalVelocity * dt);
     }
 
-    private void CheckGround()
+    private void CheckGround(float dt)
     {
         GetCapsuleWorldPoints(out var p1, out var p2, out var radius);
 
@@ -86,23 +91,18 @@ public class CharacterPhysics : IDisposable
         var hasHit = Physics.CapsuleCast(p1, p2, castRadius, Vector3.down, out RaycastHit hit,
             castDistance, _collisionMask, QueryTriggerInteraction.Ignore);
 
-        if (!hasHit)
+        var isValidGround = hasHit && Vector3.Angle(hit.normal, Vector3.up) <= _settings.MaxSlopeAngle;
+
+        if (!isValidGround)
         {
-            _isGrounded = false;
+            HandleGroundLost(dt);
             _groundCollider = null;
-            ClearElevatorParent();
             return;
         }
 
-        var slopeAngle = Vector3.Angle(hit.normal, Vector3.up);
-        _isGrounded = slopeAngle <= _settings.MaxSlopeAngle;
+        _ungroundedTimer = 0f;
+        SetGrounded(true);
         _groundCollider = hit.collider;
-
-        if (!_isGrounded)
-        {
-            ClearElevatorParent();
-            return;
-        }
 
         if (_groundCollider.CompareTag(ElevatorTag))
         {
@@ -133,6 +133,31 @@ public class CharacterPhysics : IDisposable
         }
     }
     
+    private void HandleGroundLost(float dt)
+    {
+        ClearElevatorParent();
+
+        if (!_isGrounded)
+        {
+            return;
+        }
+
+        _ungroundedTimer += dt;
+        if (_ungroundedTimer >= _settings.GroundedLossThreshold)
+        {
+            SetGrounded(false);
+        }
+    }
+
+    private void SetGrounded(bool value)
+    {
+        if (_isGrounded == value)
+            return;
+
+        _isGrounded = value;
+        OnGroundedChanged?.Invoke(_isGrounded);
+    }
+
     private void ClearElevatorParent()
     {
         if (_currentElevator == null) return;

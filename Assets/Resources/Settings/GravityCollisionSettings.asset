@@ -12,3 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf95d8a1c858d384b85d5181d0549e57, type: 3}
   m_Name: GravityCollisionSettings
   m_EditorClassIdentifier: Assembly-CSharp::GravityCollisionSettings
+  <Gravity>k__BackingField: -20
+  <GroundStickSpeed>k__BackingField: -2
+  <MaxSlopeAngle>k__BackingField: 50
+  <SkinWidth>k__BackingField: 0.03
+  <GroundCheckDistance>k__BackingField: 0.3
+  <GroundedLossThreshold>k__BackingField: 0.2
+  <MaxDepenetrationIterations>k__BackingField: 4
+  <OverlapBufferSize>k__BackingField: 8

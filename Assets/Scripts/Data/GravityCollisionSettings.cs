@@ -8,6 +8,7 @@ public class GravityCollisionSettings : ScriptableObject
     [field: SerializeField] public float MaxSlopeAngle {get; private set;} = 50f;         
     [field: SerializeField] public float SkinWidth {get; private set;} = 0.03f;
     [field: SerializeField] public float GroundCheckDistance {get; private set;} = 0.15f;
+    [field: SerializeField] public float GroundedLossThreshold {get; private set;} = 0.1f;
     [field: SerializeField] public int MaxDepenetrationIterations {get; private set;} = 4;
     [field: SerializeField] public int OverlapBufferSize {get; private set;} = 8;
 }
