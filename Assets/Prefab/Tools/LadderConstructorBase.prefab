@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6858225088369751116
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2717868611699431398}
+  - component: {fileID: 1343435354063583629}
+  m_Layer: 12
+  m_Name: LadderConstructorBase
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2717868611699431398
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6858225088369751116}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1343435354063583629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6858225088369751116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab1d892939e12294e94b9e454280c98d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LadderConstructor
+  cellPrefab: {fileID: 6858225088369751116, guid: 2320be5431d608b478ae8b708bb1d1f7, type: 3}
+  startZonePrefab: {fileID: 1267048463156707520, guid: 3759ff27cd7cea54ca87050f7abedc23, type: 3}
+  startZoneOffset: {x: 0, y: 0, z: -1}
+  startZoneScale: {x: 2, y: 1, z: 1.5}
+  endZonePrefab: {fileID: 4698867843588402589, guid: 729d3cebf4925cf4583b27b887a50546, type: 3}
+  endZoneOffset: {x: 0, y: 0, z: 0.35}
+  endZoneScale: {x: 2, y: 1, z: 1}
+  cellHeight: 1
+  cellPivotOffset: 0.5
+  cellCount: 0
+  spawnedCells:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  spawnedStartZone: {fileID: 0}
+  spawnedEndZone: {fileID: 0}
+  lastStartZonePrefab: {fileID: 1267048463156707520, guid: 3759ff27cd7cea54ca87050f7abedc23, type: 3}
+  lastEndZonePrefab: {fileID: 4698867843588402589, guid: 729d3cebf4925cf4583b27b887a50546, type: 3}
