@@ -17,11 +17,6 @@ public class VisionSystem : IInitializable, IDisposable
     public event Action<BaseCharacter, BaseCharacter> CharacterSpotted;
     public event Action<BaseCharacter, BaseCharacter> CharacterLost;
 
-    private VisionSystem()
-    {
-        Debug.Log("[VisionSystem]: VisionSystem created");
-    }
-
     public void Initialize()
     {
         _cts = new CancellationTokenSource();
@@ -85,19 +80,22 @@ public class VisionSystem : IInitializable, IDisposable
 
             foreach (var target in characters)
             {
-                if (!target || target.CharacterType == observer.CharacterType || target == observer)
+                if (!target || target.CharacterType == CharacterType.Neutral 
+                            || target.CharacterType == observer.CharacterType || target == observer)
                 {
                     continue;
                 }
 
-                if (!IsInVisionCone(observer, target))
+                var wasVisible = previouslyVisible.Contains(target);
+
+                if (!IsInVisionCone(observer, target, wasVisible))
                 {
                    continue;
                 }
                 
                 currentlyVisible.Add(target);
 
-                if (!previouslyVisible.Contains(target))
+                if (!wasVisible)
                 {
                     CharacterSpotted?.Invoke(observer, target);
                 }
@@ -119,7 +117,7 @@ public class VisionSystem : IInitializable, IDisposable
         }
     }
 
-    private bool IsInVisionCone(BaseCharacter observer, BaseCharacter target)
+    private bool IsInVisionCone(BaseCharacter observer, BaseCharacter target, bool alreadyVisible)
     {
         var eyeOffset = Vector3.up * _visionSettings.EyeHeight;
         var origin = observer.Transform.position + eyeOffset;
@@ -133,23 +131,30 @@ public class VisionSystem : IInitializable, IDisposable
             return false;
         }
 
-        if (distance > Mathf.Epsilon)
+        if (distance > Mathf.Epsilon && !HasLineOfSight(origin, toTarget, distance))
         {
-            var direction = toTarget / distance;
-            var angle = Vector3.Angle(observer.Transform.forward, direction);
-
-            if (angle > _visionSettings.ViewAngleDegrees * 0.5f)
-            {
-                return false;
-            }
+            return false;
         }
 
-        return HasLineOfSight(origin, targetPoint, distance);
+        if (distance <= Mathf.Epsilon)
+        {
+            return true;
+        }
+
+        if (alreadyVisible)
+        {
+            return true;
+        }
+
+        var direction = toTarget / distance;
+        var angle = Vector3.Angle(observer.Transform.forward, direction);
+
+        return angle <= _visionSettings.ViewAngleDegrees * 0.5f;
     }
 
-    private bool HasLineOfSight(Vector3 origin, Vector3 targetPoint, float distance)
+    private bool HasLineOfSight(Vector3 origin, Vector3 toTarget, float distance)
     {
-        var direction = (targetPoint - origin).normalized;
+        var direction = toTarget / distance;
 
         return !Physics.Raycast(
             origin,

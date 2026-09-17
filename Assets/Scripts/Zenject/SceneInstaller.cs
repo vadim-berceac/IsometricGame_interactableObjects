@@ -30,6 +30,18 @@ public class SceneInstaller : MonoInstaller
             .NonLazy();
         
         Container
+            .Bind<CombatGroupSettings>()
+            .FromScriptableObjectResource("Settings/CombatGroupSettings")
+            .AsSingle()
+            .NonLazy();
+        
+        Container
+            .Bind<CombatPositioningSettings>()
+            .FromScriptableObjectResource("Settings/CombatPositioningSettings")
+            .AsSingle()
+            .NonLazy();
+        
+        Container
             .Bind<Cursor>()
             .FromComponentInNewPrefabResource("Input/Cursor")
             .AsSingle()
@@ -78,5 +90,15 @@ public class SceneInstaller : MonoInstaller
             .BindInterfacesAndSelfTo<AttackRangeService>()
             .AsSingle()
             .NonLazy();
+        
+        Container
+            .BindInterfacesAndSelfTo<CombatGroupRegistry>()
+            .AsSingle()
+            .NonLazy();
+        
+        
+        
+        Container
+            .BindFactory<BaseCharacter, CombatGroup, CombatGroup.Factory>();
     }
 }

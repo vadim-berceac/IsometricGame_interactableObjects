@@ -56,6 +56,11 @@ public class CharacterInstaller : MonoInstaller
             .NonLazy();
         
         Container
+            .BindInterfacesAndSelfTo<CombatPositioning>()
+            .AsSingle()
+            .NonLazy();
+        
+        Container
             .Bind<ICharacterInput>()
             .FromMethod(ZenjectHelper.CreateCharacterInput)
             .AsSingle();

@@ -56,6 +56,13 @@ public class AttackRangeService : IInitializable, IDisposable
 
     private void OnCharacterSpotted(BaseCharacter observer, BaseCharacter target)
     {
+        Debug.Log($"[AttackRange] OnCharacterSpotted: {observer.name} -> {target.name}, alreadyTracked: {_tracked.ContainsKey(observer)}");
+
+        if (_tracked.ContainsKey(observer))
+        {
+            return;
+        }
+
         Track(observer, target);
     }
 

@@ -21,6 +21,8 @@ public class PlayerInputHandler : ICharacterInput, IInitializable, IDisposable
     private InputAction ScrollAction => _inputActionAsset.FindActionMap("UI").FindAction("ScrollWheel");
     private InputAction PauseAction => _inputActionAsset.FindAction("Pause");
     
+    private Vector2 _currentMove;
+    
     public void Initialize()
     {
        MoveAction.performed += Move;
@@ -72,6 +74,17 @@ public class PlayerInputHandler : ICharacterInput, IInitializable, IDisposable
         {
             PauseAction.performed -=  OnPause;
         }
+    }
+    
+    public void SetMove(Vector2 move)
+    {
+        if (_currentMove == move)
+        {
+            return;
+        }
+
+        _currentMove = move;
+        OnMove?.Invoke(move);
     }
 
     private void Move(InputAction.CallbackContext context)

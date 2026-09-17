@@ -22,6 +22,7 @@ public class Character : BaseCharacter
     [Inject] private readonly PlayableGraphHandle _graphHandle;
     [Inject] private readonly PropBones _propBones;
     [Inject] private readonly CharacterPhysics  _characterPhysics;
+    [Inject] private readonly CombatPositioning _combatPositioning;
 
     private Quaternion _targetRotation;
     private CancellationTokenSource _rotationCts;
@@ -73,7 +74,14 @@ public class Character : BaseCharacter
             StopRotationLoop();
         
             OnRotationDirection -= OnTurn;
-            return;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (CharacterType == CharacterType.Enemy || (CharacterType == CharacterType.Ally))
+        {
+            _combatPositioning.Tick(Time.fixedDeltaTime);
         }
     }
     

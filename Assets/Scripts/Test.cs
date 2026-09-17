@@ -4,17 +4,21 @@ using Zenject;
 public class Test : MonoBehaviour
 {
     [Inject] private readonly AttackRangeService _attackRangeService;
+    [Inject] private readonly CombatGroupRegistry _combatGroupRegistry;
 
     private void OnEnable()
     {
-        _attackRangeService.RangeEntered += OnRangeEntered;
-        _attackRangeService.RangeExited += OnRangeExited;
+        // _attackRangeService.RangeEntered += OnRangeEntered;
+        // _attackRangeService.RangeExited += OnRangeExited;
+        //
+        _combatGroupRegistry.ActiveAttackerChanged += (defender, active) =>
+            Debug.Log($"{defender.name}: active attacker now {(active ? active.name : "none")}");
     }
 
     private void OnDisable()
     {
-        _attackRangeService.RangeEntered -= OnRangeEntered;
-        _attackRangeService.RangeExited -= OnRangeExited;
+        // _attackRangeService.RangeEntered -= OnRangeEntered;
+        // _attackRangeService.RangeExited -= OnRangeExited;
     }
 
     private void OnRangeEntered(BaseCharacter observer, BaseCharacter target, AttackRangeZone zone)
