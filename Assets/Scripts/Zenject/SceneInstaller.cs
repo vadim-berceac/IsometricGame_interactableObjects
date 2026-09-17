@@ -18,6 +18,18 @@ public class SceneInstaller : MonoInstaller
             .NonLazy();
         
         Container
+            .Bind<AttackRangeSettings>()
+            .FromScriptableObjectResource("Settings/AttackRangeSettings")
+            .AsSingle()
+            .NonLazy();
+        
+        Container
+            .Bind<VisionSettings>()
+            .FromScriptableObjectResource("Settings/VisionSettings")
+            .AsSingle()
+            .NonLazy();
+        
+        Container
             .Bind<Cursor>()
             .FromComponentInNewPrefabResource("Input/Cursor")
             .AsSingle()
@@ -54,6 +66,16 @@ public class SceneInstaller : MonoInstaller
         
         Container
             .Bind<AnimationStates>()
+            .AsSingle()
+            .NonLazy();
+        
+        Container
+            .BindInterfacesAndSelfTo<VisionSystem>()
+            .AsSingle()
+            .NonLazy();
+        
+        Container
+            .BindInterfacesAndSelfTo<AttackRangeService>()
             .AsSingle()
             .NonLazy();
     }

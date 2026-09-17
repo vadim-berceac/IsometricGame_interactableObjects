@@ -6,7 +6,7 @@ public static class ZenjectHelper
     {
         var characterType = ctx.Container.Resolve<CharacterType>();
 
-        if (characterType == CharacterType.AI)
+        if (characterType != CharacterType.Player)
         {
             return ctx.Container.Instantiate<AIInputHandler>();
         }
