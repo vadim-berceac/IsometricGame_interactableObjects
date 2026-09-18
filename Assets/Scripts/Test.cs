@@ -5,14 +5,18 @@ public class Test : MonoBehaviour
 {
     [Inject] private readonly AttackRangeService _attackRangeService;
     [Inject] private readonly CombatGroupRegistry _combatGroupRegistry;
+    [Inject] private readonly CombatInitiator  _combatInitiator;
 
     private void OnEnable()
     {
         // _attackRangeService.RangeEntered += OnRangeEntered;
         // _attackRangeService.RangeExited += OnRangeExited;
         //
-        _combatGroupRegistry.ActiveAttackerChanged += (defender, active) =>
-            Debug.Log($"{defender.name}: active attacker now {(active ? active.name : "none")}");
+        // _combatGroupRegistry.ActiveAttackerChanged += (defender, active) =>
+        //     Debug.Log($"{defender.name}: active attacker now {(active ? active.name : "none")}");
+        
+        _combatInitiator.AttackResolved += (attacker, defender, outcome) =>
+            Debug.Log($"{attacker.name} atacks {defender.name}: {outcome}");
     }
 
     private void OnDisable()

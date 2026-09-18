@@ -19,4 +19,6 @@ public abstract class BaseCharacter : MonoBehaviour
     {
         _sceneCharacterService.RemoveCharacter(this);
     }
+
+    public abstract Stats GetStats();
 }

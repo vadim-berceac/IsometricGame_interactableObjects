@@ -23,6 +23,7 @@ public class Character : BaseCharacter
     [Inject] private readonly PropBones _propBones;
     [Inject] private readonly CharacterPhysics  _characterPhysics;
     [Inject] private readonly CombatPositioning _combatPositioning;
+    [Inject] private readonly CharacterStats _characterStats;
 
     private Quaternion _targetRotation;
     private CancellationTokenSource _rotationCts;
@@ -91,6 +92,11 @@ public class Character : BaseCharacter
         {
             _graphHandle.Evaluate(Time.deltaTime);
         }
+    }
+
+    public override Stats GetStats()
+    {
+        return _characterStats.Stats;
     }
     
     public void SetInteracting(bool value)

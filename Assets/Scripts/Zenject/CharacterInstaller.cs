@@ -9,6 +9,7 @@ public class CharacterInstaller : MonoInstaller
     [SerializeField] private Collider col;
     [SerializeField] private Character character;
     [SerializeField] private CharacterTalkInteractor characterTalkInteractor;
+    [SerializeField] private CharacterStats characterStats;
 
     public override void InstallBindings()
     {
@@ -38,6 +39,10 @@ public class CharacterInstaller : MonoInstaller
         
         Container
             .BindInstance(characterTalkInteractor)
+            .AsSingle();
+        
+        Container
+            .BindInstance(characterStats)
             .AsSingle();
         
         Container

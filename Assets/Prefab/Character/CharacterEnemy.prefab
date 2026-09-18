@@ -8,6 +8,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3218386790205638520, guid: 108c566dd851ab045956a5fe71e0920f, type: 3}
+      propertyPath: <Stats>k__BackingField.<Attack>k__BackingField
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3218386790205638520, guid: 108c566dd851ab045956a5fe71e0920f, type: 3}
+      propertyPath: <Stats>k__BackingField.<Defence>k__BackingField
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3218386790205638520, guid: 108c566dd851ab045956a5fe71e0920f, type: 3}
+      propertyPath: <Stats>k__BackingField.<Mastery>k__BackingField
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3904104934224995227, guid: 108c566dd851ab045956a5fe71e0920f, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
