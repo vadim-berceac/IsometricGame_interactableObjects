@@ -15,6 +15,24 @@ public class CombatPositioning : IInitializable, IDisposable
     private float _orbitAngle;
     private float _orbitDirection;
 
+    public bool IsInCombat => _defender != null;
+    public BaseCharacter Defender => _defender;
+    public bool IsActiveAttacker => _isActiveAttacker;
+    public bool IsDefending => GetDefenderActiveAttacker() != null;
+
+    public bool IsCombatControlled => IsInCombat || IsDefending;
+
+    private BaseCharacter GetDefenderActiveAttacker()
+    {
+        if (_self == null || _registry == null)
+        {
+            return null;
+        }
+
+        var myGroup = _registry.GetGroup(_self);
+        return myGroup != null ? myGroup.ActiveAttacker : null;
+    }
+
     public void Initialize()
     {
         _registry.AttackerJoined += OnAttackerJoined;
@@ -27,7 +45,10 @@ public class CombatPositioning : IInitializable, IDisposable
         _registry.AttackerJoined -= OnAttackerJoined;
         _registry.AttackerLeft -= OnAttackerLeft;
         _registry.ActiveAttackerChanged -= OnActiveAttackerChanged;
+        SetPlayerCombatOverride(false);
     }
+
+    private Transform SelfTransform => _self != null ? _self.transform : _transform;
 
     private void OnAttackerJoined(BaseCharacter defender, BaseCharacter attacker)
     {
@@ -39,13 +60,15 @@ public class CombatPositioning : IInitializable, IDisposable
         _defender = defender;
         _isActiveAttacker = _registry.GetGroup(defender)?.ActiveAttacker == _self;
 
-        var initialOffset = _transform.position - defender.Transform.position;
+        var initialOffset = SelfTransform.position - defender.Transform.position;
         initialOffset.y = 0f;
         _orbitAngle = initialOffset.sqrMagnitude > 0.0001f
             ? Mathf.Atan2(initialOffset.z, initialOffset.x) * Mathf.Rad2Deg
             : UnityEngine.Random.Range(0f, 360f);
 
         _orbitDirection = UnityEngine.Random.value > 0.5f ? 1f : -1f;
+
+        SetPlayerCombatOverride(true);
     }
 
     private void OnAttackerLeft(BaseCharacter defender, BaseCharacter attacker)
@@ -58,6 +81,7 @@ public class CombatPositioning : IInitializable, IDisposable
         _defender = null;
         _isActiveAttacker = false;
         _characterInput.SetMove(Vector2.zero);
+        SetPlayerCombatOverride(false);
     }
 
     private void OnActiveAttackerChanged(BaseCharacter defender, BaseCharacter activeAttacker)
@@ -72,32 +96,74 @@ public class CombatPositioning : IInitializable, IDisposable
 
     public void Tick(float deltaTime)
     {
-        if (!_defender)
+        var selfTransform = SelfTransform;
+        if (selfTransform == null || _settings == null)
         {
             return;
         }
 
-        if (!_isActiveAttacker)
+        if (_defender&& !_defender)
         {
-            _orbitAngle += _settings.OrbitSpeedDegrees * _orbitDirection * deltaTime;
-        }
-
-        var currentForward = _transform.forward;
-        var targetPoint = GetTargetPoint();
-
-        var toTarget = targetPoint - _transform.position;
-        toTarget.y = 0f;
-
-        FaceTowards(_defender.Transform.position, deltaTime);
-
-        if (!_isActiveAttacker && IsBlocked(toTarget))
-        {
+            _defender = null;
+            _isActiveAttacker = false;
             _characterInput.SetMove(Vector2.zero);
+            SetPlayerCombatOverride(false);
+        }
+
+        var myActiveAttacker = GetDefenderActiveAttacker();
+        var isPlayer = _self && _self.CharacterType == CharacterType.Player;
+
+        if (_defender)
+        {
+            if (!_defender.Transform)
+            {
+                return;
+            }
+
+            if (!_isActiveAttacker)
+            {
+                _orbitAngle += _settings.OrbitSpeedDegrees * _orbitDirection * deltaTime;
+            }
+
+            var currentForward = selfTransform.forward;
+            var targetPoint = GetTargetPoint();
+
+            var toTarget = targetPoint - selfTransform.position;
+            toTarget.y = 0f;
+
+            if (isPlayer && myActiveAttacker && myActiveAttacker.Transform)
+            {
+                FaceTowards(myActiveAttacker.Transform.position, deltaTime);
+            }
+            else
+            {
+                FaceTowards(_defender.Transform.position, deltaTime);
+            }
+
+            if (!_isActiveAttacker && IsBlocked(toTarget))
+            {
+                _characterInput.SetMove(Vector2.zero);
+                return;
+            }
+
+            var localMove = ToLocalMove(currentForward, toTarget);
+            _characterInput.SetMove(localMove);
             return;
         }
 
-        var localMove = ToLocalMove(currentForward, toTarget);
-        _characterInput.SetMove(localMove);
+        if (myActiveAttacker && myActiveAttacker.Transform)
+        {
+            FaceTowards(myActiveAttacker.Transform.position, deltaTime);
+        }
+
+        if (isPlayer && _characterInput is PlayerInputHandler playerInput)
+        {
+            var shouldLock = IsInCombat || myActiveAttacker;
+            if (playerInput.IsCombatControlled != shouldLock)
+            {
+                playerInput.SetCombatControlled(shouldLock);
+            }
+        }
     }
 
     private bool IsBlocked(Vector3 worldDirection)
@@ -107,17 +173,33 @@ public class CombatPositioning : IInitializable, IDisposable
             return false;
         }
 
-        var direction = worldDirection.normalized;
-        var origin = _transform.position + Vector3.up * _settings.ObstacleCheckHeight;
+        var st = SelfTransform;
+        if (st == null)
+        {
+            return false;
+        }
 
-        return Physics.SphereCast(
+        var direction = worldDirection.normalized;
+        var origin = st.position + Vector3.up * _settings.ObstacleCheckHeight;
+
+        if (!Physics.SphereCast(
             origin,
             _settings.ObstacleCheckRadius,
             direction,
-            out _,
+            out var hit,
             _settings.ObstacleCheckDistance,
             _settings.ObstacleMask,
-            QueryTriggerInteraction.Ignore);
+            QueryTriggerInteraction.Ignore))
+        {
+            return false;
+        }
+
+        if (hit.collider != null && hit.collider.GetComponentInParent<BaseCharacter>() != null)
+        {
+            return false;
+        }
+
+        return true;
     }
 
     private Vector3 GetTargetPoint()
@@ -131,7 +213,13 @@ public class CombatPositioning : IInitializable, IDisposable
 
     private void FaceTowards(Vector3 worldPoint, float deltaTime)
     {
-        var direction = worldPoint - _transform.position;
+        var st = SelfTransform;
+        if (!st || !_settings)
+        {
+            return;
+        }
+
+        var direction = worldPoint - st.position;
         direction.y = 0f;
 
         if (direction.sqrMagnitude < 0.001f)
@@ -139,11 +227,12 @@ public class CombatPositioning : IInitializable, IDisposable
             return;
         }
 
+        var rotSpeed = _settings.RotationSpeedDegrees > 0f ? _settings.RotationSpeedDegrees : 360f;
         var targetRotation = Quaternion.LookRotation(direction);
-        _transform.rotation = Quaternion.Slerp(
-            _transform.rotation,
+        st.rotation = Quaternion.Slerp(
+            st.rotation,
             targetRotation,
-            _settings.RotationSpeedDegrees * deltaTime / 180f);
+            rotSpeed * deltaTime / 180f);
     }
 
     private Vector2 ToLocalMove(Vector3 forward, Vector3 worldDirection)
@@ -155,5 +244,14 @@ public class CombatPositioning : IInitializable, IDisposable
 
         var local = Quaternion.Inverse(Quaternion.LookRotation(forward)) * worldDirection.normalized;
         return new Vector2(local.x, local.z);
+    }
+
+    private void SetPlayerCombatOverride(bool value)
+    {
+        if (_self && _self.CharacterType == CharacterType.Player
+            && _characterInput is PlayerInputHandler playerInput)
+        {
+            playerInput.SetCombatControlled(value);
+        }
     }
 }

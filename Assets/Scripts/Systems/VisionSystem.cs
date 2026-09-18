@@ -65,7 +65,14 @@ public class VisionSystem : IInitializable, IDisposable
 
         foreach (var observer in characters)
         {
-            if (!observer || observer.CharacterType != CharacterType.Enemy)
+            if (!observer || observer.CharacterType == CharacterType.Neutral)
+            {
+                continue;
+            }
+
+            if (observer.CharacterType != CharacterType.Enemy
+                && observer.CharacterType != CharacterType.Player
+                && observer.CharacterType != CharacterType.Ally)
             {
                 continue;
             }
@@ -80,8 +87,12 @@ public class VisionSystem : IInitializable, IDisposable
 
             foreach (var target in characters)
             {
-                if (!target || target.CharacterType == CharacterType.Neutral 
-                            || target.CharacterType == observer.CharacterType || target == observer)
+                if (!target || target == observer)
+                {
+                    continue;
+                }
+
+                if (!IsHostile(observer.CharacterType, target.CharacterType))
                 {
                     continue;
                 }
@@ -146,10 +157,30 @@ public class VisionSystem : IInitializable, IDisposable
             return true;
         }
 
+        if (observer.CharacterType == CharacterType.Player)
+        {
+            return true;
+        }
+
         var direction = toTarget / distance;
         var angle = Vector3.Angle(observer.Transform.forward, direction);
 
         return angle <= _visionSettings.ViewAngleDegrees * 0.5f;
+    }
+
+    private bool IsHostile(CharacterType observer, CharacterType target)
+    {
+        switch (observer)
+        {
+            case CharacterType.Enemy:
+                return target == CharacterType.Player || target == CharacterType.Ally;
+            case CharacterType.Player:
+                return target == CharacterType.Enemy;
+            case CharacterType.Ally:
+                return target == CharacterType.Enemy;
+            default:
+                return false;
+        }
     }
 
     private bool HasLineOfSight(Vector3 origin, Vector3 toTarget, float distance)

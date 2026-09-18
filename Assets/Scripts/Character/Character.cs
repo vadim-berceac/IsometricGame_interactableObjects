@@ -78,11 +78,31 @@ public class Character : BaseCharacter
         }
     }
 
+    private bool IsPlayerLockedInCombat()
+    {
+        if (_combatPositioning != null && _combatPositioning.IsCombatControlled)
+        {
+            return true;
+        }
+
+        if ((_currentInput as PlayerInputHandler)?.IsCombatControlled == true)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     private void FixedUpdate()
     {
-        if (CharacterType == CharacterType.Enemy || (CharacterType == CharacterType.Ally))
+        if (CharacterType != CharacterType.Neutral)
         {
             _combatPositioning.Tick(Time.fixedDeltaTime);
+
+            if (CharacterType == CharacterType.Player && IsPlayerLockedInCombat())
+            {
+                _targetRotation = Transform.rotation;
+            }
         }
     }
     
@@ -161,7 +181,7 @@ public class Character : BaseCharacter
     {
         while (!token.IsCancellationRequested)
         {
-            if (IsGrounded && !IsInteracting && !IsOnLadder) 
+            if (IsGrounded && !IsInteracting && !IsOnLadder && !IsPlayerLockedInCombat())
             {
                 var previousRotation = Transform.rotation;
                 Transform.rotation = Quaternion.Slerp(Transform.rotation, _targetRotation, rotationToCursorSpeed * Time.deltaTime);
@@ -187,6 +207,11 @@ public class Character : BaseCharacter
     private void RotatePlayerToCursor(Vector3 cursorPosition)
     {
         if (!IsGrounded || IsInteracting || IsOnLadder)
+        {
+            return;
+        }
+
+        if (IsPlayerLockedInCombat())
         {
             return;
         }

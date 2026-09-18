@@ -22,6 +22,18 @@ public class PlayerInputHandler : ICharacterInput, IInitializable, IDisposable
     private InputAction PauseAction => _inputActionAsset.FindAction("Pause");
     
     private Vector2 _currentMove;
+    private bool _combatControlled;
+
+    public bool IsCombatControlled => _combatControlled;
+
+    public void SetCombatControlled(bool value)
+    {
+        _combatControlled = value;
+        if (value)
+        {
+            _currentMove = Vector2.zero;
+        }
+    }
     
     public void Initialize()
     {
@@ -89,11 +101,23 @@ public class PlayerInputHandler : ICharacterInput, IInitializable, IDisposable
 
     private void Move(InputAction.CallbackContext context)
     {
-        OnMove?.Invoke(context.ReadValue<Vector2>());
+        if (_combatControlled)
+        {
+            return;
+        }
+
+        _currentMove = context.ReadValue<Vector2>();
+        OnMove?.Invoke(_currentMove);
     }
     
     private void MoveCancel(InputAction.CallbackContext context)
     {
+        if (_combatControlled)
+        {
+            return;
+        }
+
+        _currentMove = Vector2.zero;
         OnMove?.Invoke(Vector2.zero);
     }
 
