@@ -24,7 +24,7 @@ public class CombatPositioning : IInitializable, IDisposable
 
     private BaseCharacter GetDefenderActiveAttacker()
     {
-        if (_self == null || _registry == null)
+        if (!_self || _registry == null)
         {
             return null;
         }
@@ -97,7 +97,7 @@ public class CombatPositioning : IInitializable, IDisposable
     public void Tick(float deltaTime)
     {
         var selfTransform = SelfTransform;
-        if (selfTransform == null || _settings == null)
+        if (!selfTransform || !_settings)
         {
             return;
         }
@@ -140,13 +140,30 @@ public class CombatPositioning : IInitializable, IDisposable
                 FaceTowards(_defender.Transform.position, deltaTime);
             }
 
-            if (!_isActiveAttacker && IsBlocked(toTarget))
+            var moveDirection = toTarget;
+
+            if (IsBlocked(toTarget, out var slid))
             {
-                _characterInput.SetMove(Vector2.zero);
-                return;
+                if (!_isActiveAttacker)
+                {
+                    _orbitAngle += _settings.OrbitSpeedDegrees * _orbitDirection * deltaTime;
+                }
+
+                if (slid.sqrMagnitude < 0.0001f)
+                {
+                    _characterInput.SetMove(Vector2.zero);
+                    return;
+                }
+
+                moveDirection = slid;
             }
 
-            var localMove = ToLocalMove(currentForward, toTarget);
+            if (moveDirection != toTarget && IsBlocked(moveDirection, out _))
+            {
+                moveDirection = -moveDirection;
+            }
+
+            var localMove = ToLocalMove(currentForward, moveDirection);
             _characterInput.SetMove(localMove);
             return;
         }
@@ -166,20 +183,23 @@ public class CombatPositioning : IInitializable, IDisposable
         }
     }
 
-    private bool IsBlocked(Vector3 worldDirection)
+    private bool IsBlocked(Vector3 worldDirection, out Vector3 slideDirection)
     {
+        slideDirection = worldDirection;
+
         if (worldDirection.sqrMagnitude < 0.0001f)
         {
             return false;
         }
 
         var st = SelfTransform;
-        if (st == null)
+        if (!st)
         {
             return false;
         }
 
-        var direction = worldDirection.normalized;
+        var distance = worldDirection.magnitude;
+        var direction = worldDirection / distance;
         var origin = st.position + Vector3.up * _settings.ObstacleCheckHeight;
 
         if (!Physics.SphereCast(
@@ -187,18 +207,37 @@ public class CombatPositioning : IInitializable, IDisposable
             _settings.ObstacleCheckRadius,
             direction,
             out var hit,
-            _settings.ObstacleCheckDistance,
+            distance + _settings.ObstacleCheckRadius,
             _settings.ObstacleMask,
             QueryTriggerInteraction.Ignore))
         {
             return false;
         }
 
-        if (hit.collider != null && hit.collider.GetComponentInParent<BaseCharacter>() != null)
+        if (!(hit.collider|| hit.collider.GetComponentInParent<BaseCharacter>()))
         {
             return false;
         }
 
+        var normal = hit.normal;
+        normal.y = 0f;
+
+        if (normal.sqrMagnitude < 0.0001f)
+        {
+            return true;
+        }
+
+        normal.Normalize();
+
+        var projected = direction - normal * Vector3.Dot(direction, normal);
+        if (projected.sqrMagnitude > 0.0001f)
+        {
+            slideDirection = projected;
+            return true;
+        }
+
+        var tangent = Vector3.Cross(Vector3.up, normal);
+        slideDirection = tangent * (Vector3.Dot(tangent, direction) >= 0f ? 1f : -1f);
         return true;
     }
 
