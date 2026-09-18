@@ -16,3 +16,9 @@ MonoBehaviour:
   <HoldingDistance>k__BackingField: 4
   <RotationSpeedDegrees>k__BackingField: 360
   <OrbitSpeedDegrees>k__BackingField: 30
+  ObstacleCheckRadius: 0.3
+  ObstacleCheckDistance: 0.5
+  ObstacleCheckHeight: 1
+  ObstacleMask:
+    serializedVersion: 2
+    m_Bits: 24577

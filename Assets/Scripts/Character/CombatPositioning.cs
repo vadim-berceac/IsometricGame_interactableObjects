@@ -39,15 +39,12 @@ public class CombatPositioning : IInitializable, IDisposable
         _defender = defender;
         _isActiveAttacker = _registry.GetGroup(defender)?.ActiveAttacker == _self;
 
-        // Стартовый угол берём из текущего положения относительно дефендера,
-        // чтобы не было "прыжка" в момент присоединения к группе.
         var initialOffset = _transform.position - defender.Transform.position;
         initialOffset.y = 0f;
         _orbitAngle = initialOffset.sqrMagnitude > 0.0001f
             ? Mathf.Atan2(initialOffset.z, initialOffset.x) * Mathf.Rad2Deg
             : UnityEngine.Random.Range(0f, 360f);
 
-        // Случайное направление обхода, чтобы разные атакующие не двигались синхронно.
         _orbitDirection = UnityEngine.Random.value > 0.5f ? 1f : -1f;
     }
 
@@ -80,7 +77,6 @@ public class CombatPositioning : IInitializable, IDisposable
             return;
         }
 
-        // Обходим дефендера по кругу, пока не наш ход атаковать.
         if (!_isActiveAttacker)
         {
             _orbitAngle += _settings.OrbitSpeedDegrees * _orbitDirection * deltaTime;
@@ -94,8 +90,34 @@ public class CombatPositioning : IInitializable, IDisposable
 
         FaceTowards(_defender.Transform.position, deltaTime);
 
+        if (!_isActiveAttacker && IsBlocked(toTarget))
+        {
+            _characterInput.SetMove(Vector2.zero);
+            return;
+        }
+
         var localMove = ToLocalMove(currentForward, toTarget);
         _characterInput.SetMove(localMove);
+    }
+
+    private bool IsBlocked(Vector3 worldDirection)
+    {
+        if (worldDirection.sqrMagnitude < 0.0001f)
+        {
+            return false;
+        }
+
+        var direction = worldDirection.normalized;
+        var origin = _transform.position + Vector3.up * _settings.ObstacleCheckHeight;
+
+        return Physics.SphereCast(
+            origin,
+            _settings.ObstacleCheckRadius,
+            direction,
+            out _,
+            _settings.ObstacleCheckDistance,
+            _settings.ObstacleMask,
+            QueryTriggerInteraction.Ignore);
     }
 
     private Vector3 GetTargetPoint()
